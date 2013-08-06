@@ -38,7 +38,8 @@ Ubuntu Packages
 * *ubuntu-12.04.2-server-amd64.iso* file (656MB) will be downloaded from Ubuntu server. Putting this file to the script folder (before running the builder) will prevent download process.
 * The process will create ~1.35GB **uncompressed** qcow2 formatted image file. It can be **compress** to ~400MB.
 * The building process can be monitor with VNC client.
-* Qemu doesn't require X Window System. Use "-display none -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic" parameter for starting VM and use "ssh docker@localhost -p 8022" for connection.
+* Qemu doesn't require X Window System. Use ``-display none -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic`` parameter for starting VM and use ``ssh docker@localhost -p 8022`` for connection.
+* [Qemu for Windows](http://lassauge.free.fr/qemu/) doesn't require any installation. So [Qemu archive file](http://lassauge.free.fr/qemu/release/Qemu-1.5.1-windows.zip) and the VMI can be contribute with a single archive file.
 
 ### Showcase
 
