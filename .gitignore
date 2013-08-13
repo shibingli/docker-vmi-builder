@@ -1,34 +1,14 @@
-# Ignored Git Files and Folders
-#
-# This file should be in the repo root folder.
-#
-# If there is files to be commit when run "git status"
-#
-#   "git rm --cache . -r"   // Clear cache
-#   "git add ."             // Add all files
-#
-#   or
-#
-#   "git rm filename" or "git rm dirname -r"
-#
+# Git Ignore
 
-# Dynamic files and folders
+# Examples
 #
-#   Example:  folder/
+#   node_modules/
+#   /.tmp-file-*
+#   /tmp-dir/*
+#   /symlink*
 #
 docker-vmi-temp/
-
-# Files and folders for apps
-#
-#   Example:  /.tmp-file-*
-#             /tmp-data/*
-#
 sources/
 docker-vmi-iso.iso
 docker-vmi-img.img
 ubuntu-12.04.2-server-amd64.iso
-
-# Symbolic links. (Do not add / end of path!)
-#
-#   Example:  /symlink*
-#

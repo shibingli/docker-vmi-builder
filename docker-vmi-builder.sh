@@ -1,10 +1,7 @@
 #!/bin/bash
-# This file is part of docker-vmi-builder
-# Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/docker-vmi-builder)
-# Licensed under The MIT License (MIT)
-# For the full copyright and license information, please view the LICENSE.txt file.
-
 # Docker VMI (Virtual Machine Image) Builder
+# Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/docker-vmi-builder)
+# For the full copyright and license information, please view the LICENSE.txt file.
 
 # Init reqs
 sudo echo "$(date): Begin"
