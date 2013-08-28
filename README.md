@@ -58,5 +58,5 @@ Ubuntu Packages
 ### License
 
 Copyright (c) 2013 Fatih Cetinkaya (http://github.com/cmfatih/docker-vmi-builder)  
-Licensed under The MIT License (MIT) - http://www.opensource.org/licenses/mit-license.php  
+Licensed under The MIT License (MIT)  
 For the full copyright and license information, please view the LICENSE.txt file.
