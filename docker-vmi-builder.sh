@@ -10,7 +10,7 @@ sudo echo "$(date): Begin"
 DOCKER_ISO_FILE="docker-vmi-iso.iso"
 DOCKER_VMI_FILE="docker-vmi-img.img"
 DOCKER_TMP_FOLDER="docker-vmi-temp"
-UBUNTU_ISO_FILE="ubuntu-12.04.2-server-amd64.iso"
+UBUNTU_ISO_FILE="ubuntu-12.04.3-server-amd64.iso"
 UBUNTU_ISO_URL="http://releases.ubuntu.com/precise/$UBUNTU_ISO_FILE"
 UBUNTU_PKGS="qemu-system rsync genisoimage"
 
@@ -18,10 +18,16 @@ UBUNTU_PKGS="qemu-system rsync genisoimage"
 echo "$(date): Checking required packages... ($UBUNTU_PKGS)"
 sudo apt-get update -qq && sudo apt-get install -y -qq $UBUNTU_PKGS
 
-# Download Ubuntu
+# Download Ubuntu ISO
 if [ ! -f $UBUNTU_ISO_FILE ]; then
   echo "$(date): Downloading Ubuntu ISO file... ($UBUNTU_ISO_FILE)"
   wget $UBUNTU_ISO_URL
+fi
+
+# Check Ubuntu ISO
+if [ ! -f $UBUNTU_ISO_FILE ]; then
+  echo "$(date): Ubuntu ISO file could not be found... ($UBUNTU_ISO_FILE)"
+  exit
 fi
 
 # Init folders and files
@@ -94,10 +100,18 @@ d-i mirror/http/directory string /ubuntu
 d-i mirror/http/proxy string
 
 # Apt setup
-d-i apt-setup/local0/repository string http://ppa.launchpad.net/dotcloud/lxc-docker/ubuntu precise main
+
+# Docker version <= 0.5.x
+#d-i apt-setup/local0/repository string http://ppa.launchpad.net/dotcloud/lxc-docker/ubuntu precise main
+#d-i apt-setup/local0/comment string Docker PPA
+#d-i apt-setup/local0/source boolean true
+#d-i apt-setup/local0/key string http://keyserver.ubuntu.com:11371/pks/lookup?search=0x086727ee13663dc76ebf7e1fe61d797f63561dc6&op=get
+
+# Docker version >= 0.6.x
+d-i apt-setup/local0/repository string http://get.docker.io/ubuntu docker main
 d-i apt-setup/local0/comment string Docker PPA
-d-i apt-setup/local0/source boolean true
-d-i apt-setup/local0/key string http://keyserver.ubuntu.com:11371/pks/lookup?search=0x086727ee13663dc76ebf7e1fe61d797f63561dc6&op=get
+d-i apt-setup/local0/source boolean false
+d-i apt-setup/local0/key string http://get.docker.io/gpg
 
 # Packages
 tasksel tasksel/first multiselect openssh-server
@@ -151,6 +165,10 @@ echo "$(date): End"
 # Creating VMI
 #   qemu-img create -f qcow2 docker-vmi-img.img 8G
 #   sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d -display none -usbdevice tablet -vnc :5,docker
-# Running VM
-#   Linux:  sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -display none -usbdevice tablet -vnc :5,docker -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic -daemonize
-#   Win:    qemu-system-x86_64w.exe -L Bios -hda docker-vmi-img.img -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic
+#   sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d
+# Checking VM
+#   Linux:  
+#     sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -display none -usbdevice tablet -vnc :5,docker -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic -daemonize
+#     ssh docker@127.0.0.1 -p 8022
+#   Win:
+#     qemu-system-x86_64w.exe -L Bios -hda docker-vmi-img.img -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic
