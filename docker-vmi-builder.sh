@@ -115,7 +115,7 @@ d-i apt-setup/local0/key string http://get.docker.io/gpg
 
 # Packages
 tasksel tasksel/first multiselect openssh-server
-d-i pkgsel/include string python-software-properties lxc-docker
+d-i pkgsel/include string lxc-docker
 
 # Boot loader
 d-i grub-installer/only_debian boolean true
