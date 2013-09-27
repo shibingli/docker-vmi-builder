@@ -72,9 +72,9 @@ echo "
 
 # User account
 d-i passwd/user-fullname string Docker User
-d-i passwd/username string docker
-d-i passwd/user-password password docker
-d-i passwd/user-password-again password docker
+d-i passwd/username string dockervmi
+d-i passwd/user-password password dockervmi
+d-i passwd/user-password-again password dockervmi
 d-i user-setup/allow-password-weak boolean true
 d-i passwd/user-default-groups string audio cdrom video adm sudo
 d-i user-setup/encrypt-home boolean false
