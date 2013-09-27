@@ -169,6 +169,6 @@ echo "$(date): End"
 # Checking VM
 #   Linux:  
 #     sudo qemu-system-x86_64 -m 1024 -hda docker-vmi-img.img -display none -usbdevice tablet -vnc :5,docker -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic -daemonize
-#     ssh docker@127.0.0.1 -p 8022
+#     ssh dockervmi@127.0.0.1 -p 8022
 #   Win:
 #     qemu-system-x86_64w.exe -L Bios -hda docker-vmi-img.img -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic
