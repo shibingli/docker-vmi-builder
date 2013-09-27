@@ -153,7 +153,7 @@ echo "$(date): Removing temporary folder... ($DOCKER_TMP_FOLDER)"
 sudo rm -rf $DOCKER_TMP_FOLDER
 
 echo "$(date): Creating VMI... (The process can be monitor with a VNC client. (5/5905))"
-sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda $DOCKER_VMI_FILE -cdrom $DOCKER_ISO_FILE -boot d -display none -usbdevice tablet -vnc :5,docker
+sudo qemu-system-x86_64 -m 1024 -hda $DOCKER_VMI_FILE -cdrom $DOCKER_ISO_FILE -boot d -display none -usbdevice tablet -vnc :5,docker
 
 # Done!
 echo "$(date): End"
@@ -161,14 +161,14 @@ echo "$(date): End"
 # for tests
 #
 # Checking ISO
-#   sudo qemu-system-x86_64 -enable-kvm -m 1024 -cdrom docker-vmi-iso.iso -boot d -display none -usbdevice tablet -vnc :5,docker
+#   sudo qemu-system-x86_64 -m 1024 -cdrom docker-vmi-iso.iso -boot d -display none -usbdevice tablet -vnc :5,docker
 # Creating VMI
 #   qemu-img create -f qcow2 docker-vmi-img.img 8G
-#   sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d -display none -usbdevice tablet -vnc :5,docker
-#   sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d
+#   sudo qemu-system-x86_64 -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d -display none -usbdevice tablet -vnc :5,docker
+#   sudo qemu-system-x86_64 -m 1024 -hda docker-vmi-img.img -cdrom docker-vmi-iso.iso -boot d
 # Checking VM
 #   Linux:  
-#     sudo qemu-system-x86_64 -enable-kvm -m 1024 -hda docker-vmi-img.img -display none -usbdevice tablet -vnc :5,docker -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic -daemonize
+#     sudo qemu-system-x86_64 -m 1024 -hda docker-vmi-img.img -display none -usbdevice tablet -vnc :5,docker -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic -daemonize
 #     ssh docker@127.0.0.1 -p 8022
 #   Win:
 #     qemu-system-x86_64w.exe -L Bios -hda docker-vmi-img.img -net user,hostfwd=tcp:127.0.0.1:8022-:22 -net nic
